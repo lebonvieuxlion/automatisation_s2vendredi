@@ -45,12 +45,18 @@ def gemfile_setup
 	file.close
 end
 
+
+
+#DEPLACEMENT DU GEMFILE
+
 def move_gemfile
 
 	path_name = get_folder_name
 	FileUtils.mv "Gemfile", "#{path_name}/Gemfile"		#permet de bouger le fichier Gemfile dans le dossier créé
 end
 
+
+#INITIALISATION DE GIT
 
 def initializing_git
 
@@ -60,7 +66,38 @@ def initializing_git
 end
 
 
+#CREATION DE .ENV et .GITIGNORE
+
+def creating_env_and_gitignore
+
+	file_env = File.open("#{get_folder_name}/.env", "w")					#Création du fichier .env
+
+	file_gitignore = File.open("#{get_folder_name}/.gitignore", "w")		#Création du fichier .gitignore
+
+	file_gitignore.puts(".env")												#imbrication de .env dans gitignore
+end
+
+
+#CREATION DOSSIER LIB
+
+def creation_lib_directory
+
+	Dir.mkdir("#{get_folder_name}/lib")
+
+end
+
+
+#CREATION README
+
+def creation_readme
+
+	file_readme = File.open("#{get_folder_name}/README.md", "w")
+
+	file_readme.puts("Ce programme est écrit en Ruby et a été réalisé par Lionel Debauge pour The Hacking Project")
+end
+
+
 create_dir
-gemfile_setup
-move_gemfile
-initializing_git
+creation_readme
+
+#Manque juste à faire le rspec --init 
